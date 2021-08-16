@@ -1,0 +1,6 @@
+java_day13
+2021/7/28
+
+***** 请记住：在进行方法覆盖时，访问权限只能更高，不能降低【详见day08】
+
+1.ideal提示快捷键修改界面：file--->setting--->keymap--->Main Menu--->Code--->Completion--->Basic

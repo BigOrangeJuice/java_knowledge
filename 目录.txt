@@ -1,0 +1,168 @@
+目录：
+
+day01:
+
+	1>DOS命令
+	2>文件拓展名
+	3>java语言主要特性
+	4>java的加载与运行
+	5>JDK,JRE,JVM三者关系
+	6>Hello World!
+	7>注释
+	8>public class 和 class 的区别
+
+day02:
+
+	1>标识符
+	2>关键字
+	3>字面值
+	4>变量
+	5>作用域
+	6>生命周期
+	7>实践static
+	8>基本数据类型
+	9>类型转换
+	10>运算符
+	11>输入输出
+
+day03:
+
+	1>定义变量
+	2>方法
+	3>内容空间
+	4>方法重载(overload)
+	5>方法递归
+
+day04:
+
+	1>面向过程和面向对象
+	2>面向对象的三大特征
+	3>类和对象
+	4>类的定义
+	5>引用数据类型
+	6>实例化对象
+	7>new运算符
+	8>对象
+	9>引用
+	10>访问对象
+	11>实践new
+	12>线程【粗略概念】
+	13>空指针异常
+
+day05:
+
+	1>数组
+
+day06:做题
+
+day07:
+
+	1>封装
+	2>构造方法
+	3>实例变量默认赋值时机
+	4>参数传递
+
+day08:
+
+	1>this关键字
+	2>static修饰
+	3>static关键字
+	4>实例代码块
+	5>方法定义的提议
+	6>继承
+	7>方法覆盖
+
+day09:
+
+	1>多态
+	2>final关键字
+	3>package
+	4>import
+	5>访问控制权限修饰符
+
+day10:刷题
+
+day11:
+
+	1>类体
+	2>main方法
+	3>二维数组作参数
+	4>比较字符串中==和.equals()
+	5>Arrays.toString(数组名)：直接输出数组
+	6>选择排序和冒泡排序
+	7>super关键字
+
+day12:
+
+	1>抽象类
+	2>接口
+	3>类与接口
+	4>接口在开发中的应用
+	5>is a、has a、like a
+	6>抽象类和接口
+
+day13:
+
+	1>ideal提示快捷键修改界面
+	2>实践
+
+day14:
+
+	1>toString()方法
+	2>equals()方法
+	3>hashCode()方法
+	4>String()类中的方法
+	5>StringBuffer类
+	6>StringBuilder相较于StringBuffer
+
+day15:
+
+	1>包装类
+	2>String，int，Integer互换
+
+day16:
+
+	1>Arrays类中的方法
+	2>enum枚举
+	3>生成随机数
+	4>Date类
+	5>SimpleDateFormat类方法
+	6>currentTimeMillis()方法
+	7>数字类
+	8>BigDeciamal类
+	
+day17：
+
+	1>异常
+	2>finally语句
+	3>自定义异常
+	4>throw
+	5>常见异常
+
+day18、day19：
+
+	1>clone()方法
+	2>集合
+	3>Iterator迭代器
+	4>集合和迭代器
+
+day20：
+
+	1>List接口
+	2>ArrayList类
+	3>链表
+	4>向量Vector
+	5>ArrayList转为Vector
+	6>泛型
+	7>自动类型推断机制
+	8>增强for循环：foreach
+
+day21：
+
+	1>IO流
+	2>FileInputStream
+	3>FileOutputStream
+
+day22:
+
+	1>实践：水电费管理系统

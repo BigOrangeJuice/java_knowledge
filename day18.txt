@@ -1,0 +1,108 @@
+java_day18、day19
+2021/8/4、2021/8/5
+
+1.clone()方法：
+
+	* 作用：用于克隆对象
+
+	* 优点：少处理任务
+
+	* 使用：引用.clone()
+
+2.集合：
+
+	—— 数组就是一个集合。所谓集合，实际上就是一个容器，可以用来容纳其他类型的容器
+
+	—— 集合不能直接存储基本数据类型，集合也不能之间存储java对象，集合当中存储的都是java对象的内存地址【引用】
+
+	—— 集合也是一个对象，也有内存地址，也可以被指向，可以被大的集合所包含
+
+	—— 在java中每一个不同的集合，在底层都对应不同的数据结构。往不同的集合里存放数据，等同于将数据放到了不同的数据结构中。
+
+		数据结构：数据存储的结构。
+
+			—— 不同的数据结构，有着不同的存储方式
+
+			—— 分类：数组、二叉树、链表、哈希表......
+
+	—— 所有的集合类和集合接口都在java.util中
+
+	—— java中集合分为两大类：
+
+		* 一类是以单个方式存储元素：这一类集合的超级父接口：java.util.Collection
+
+		* 一类是以键值对的方式存储元素：这一类集合的超级父接口：java.util.Map
+
+	—— 所有的实现类：
+
+		* ArrayList：底层是数组，非线程安全
+		* LinkedList：底层是双向链表
+		* Vector：底层是数组，线程安全，使用较少
+		* HashSet：底层是HashMap，放到HashSet集合的元素等同于放到HashMap的key部分
+		* TreeSet：底层是TreeMap，放到TreeSet集合的元素等同于放到TreeMap的key部分，可自动排序
+		* HashMap：底层是哈希表，非线程安全
+		* Hashtable：底层是哈希表，线程安全，使用较少
+		* Properties：底层是哈希表，继承Hashtable，并且key和value只支持String类型
+		* TreeMap：底层是二叉树，可自动排序
+
+	—— List集合存储特点：有序可重复
+
+		有序：存进时的顺序和取出时的顺序一致，每个元素都有下标
+
+	   Set集合存储特点：无序不可重复
+
+	   	无序：存进时的顺序和取出时的顺序不一定一致，每个元素都没有下标
+
+		不可重复：存储相同元素会失败，但不会报错
+	   
+	   SortedSet集合存储特点：无序不可重复，但可排序
+
+	   	可排序：按照大小排列
+
+	—— Map里的key，就是一个Set
+
+	—— Collection中可以存储Object的所有子类型【使用“泛型”后，只能存储某个具体的类型】
+
+	—— 常用方法：都是非静态
+
+		* boolean	add(Object o) - 添加指定元素。如果成功添加返回true；如果不允许重复且已经存在相同元素，则返回false
+
+		* int		size() - 返回此 collection 中的元素数
+
+		* void		clear() - 清空 collection 中的所有元素
+
+		* boolean	contains(Object o) - 如果此 collection 包含指定的元素，则返回 true
+
+		* boolean	remove(Object o) - 从此 collection 中移除指定元素的单个实例，移除成功返回true
+
+		* boolean	isEmpty() - 判断 collection 是否为空，空则为true
+
+		* Object	toArray() - 返回包含此 collection 中所有元素的数组
+	
+3.Iterator接口：迭代器
+
+	—— 迭代器最开始并没有指向集合的第一个元素
+
+	—— 常用方法：
+
+		* boolean	hasNext() - 如果仍有元素可以迭代，则返回 true
+
+		* void		remove() - 从迭代器指向的 collection 中移除迭代器返回的最后一个元素
+
+		* Object	next() - 让迭代器前进一位，并返回前进以后指向的元素
+ 
+ 4.集合和迭代器：
+
+ 	—— 当集合的结构发生改变时，迭代器必须重新获取，如果还是用老的集合，会出现异常：java.util.ConcurrentModificationException
+
+	—— 在迭代集合过程中，不能使用原集合对象的remove方法来删除元素【这样做也会使集合的结果发生改变】
+
+		解决方法：使用迭代器中的remove方法 - 这样相当于把迭代器和集合里的元素同时改变，保证了迭代器和集合保持一致
+
+	—— 通过迭代器遍历集合：
+		
+		Iterator iterator = collection.iterator() ;
+		while(iterator.hasNext()){
+			sout(iterator.next()) ;
+		}
+	

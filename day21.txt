@@ -1,0 +1,138 @@
+java_day21
+2021/8/7
+
+1.IO流：
+
+	—— I - input - 输入 - 读文件；O - output - 输出 - 写文件
+
+	—— 分类：
+
+		* 按照流的方向：输入流、输出流
+			
+			- 往内存中去，叫做输入(input)，也叫读(read)
+
+			- 从内存中出来，叫做输出(output)，也叫写(write)
+
+			eg：a水文dsb
+
+			第一次读：一个字节，正好读完'a'('a'在windows系统中占1个字节)
+			第二次读：一个字节，读完'水'的一半('水'在windows系统中占2个字节)
+			第三次读：一个字节，读完'水'的另一半('文'在windows系统中占2个字节)
+
+		* 按照读取数据方式不同：字节流、字符流
+
+			- 有的流按照字节的方式读取数据，一次读取一个字节byte，等同于一次读取8个二进制，这种流是万能流，
+			
+			  什么类型的文件都能读取。包括：文本文件、图片、声音文件、视频
+
+			- 有的流按照字符的方式读取数据，一次读取一个字符char，这种流是为了方便读取普通文本文件而存在的。
+			
+			  这种流不能读取：图片、声音、视频文件。只能读取纯文本，连word文件也无法读取
+
+			  eg：a水文dsb
+
+			  第一次读：一个字符，正好读完'a'
+			  第二次读：一个字符，正好读完'水'
+			  第三次读：一个字符，正好读完'文'
+
+	—— IO流四大家族：四位父类都是抽象类
+
+		* java.io.InputStream - 字节输入流
+
+		* java.io.OutputStream - 字节输出流
+
+		* java.io.Reader - 字符输入流
+
+		* java.io.Writer - 字符输出流
+
+		所有流均实现了Closeable接口【里面有个抽象方法close()】，因此每个流都是可关闭的
+		
+			同时也建议每个流用完都关闭
+
+		所有输出流都实现了Flushable接口【里面有flush()】，因此每个输出流都是可刷新的
+
+			建议输出流在最终输出之后，一定要flush()刷新一下，这样可以将管道中剩余未输出完的数据强行输出完毕，进而清空管道
+
+			！！没有flush()可能导致数据流失
+
+		注意：在java中，只要类名以Stream结尾的都是字节流；以"Reader/Writer"结尾的都是字符流
+
+	—— 需要掌握的16个流：
+		
+		* 文件专属
+		java.io.FileInputStream
+		java.io.FileOutputStream
+		java.io.FileReader
+		java.io.FileWriter
+		
+		* 转换流：将字节流转换为字符流
+		java.io.InputStreamReader
+		java.io.OutputStreamWriter
+		
+		* 缓冲流：
+		java.io.BufferedInputStream
+		java.io.BufferedOutputStream
+		java.io.BufferedReader
+		java.io.BufferedWriter
+
+		* 数据流：
+		java.io.DataInputStream
+		java.io.DataOutputStream
+
+		* 标椎输出流
+		java.io.PrintWriter
+		java.io.PrintStream
+
+		* 对象专属流：
+		java.io.ObjectInputStream
+		java.io.ObjectOutputStream
+
+2.FileInputStream：
+
+	—— 文件字节输入流，万能输入流，任何文件都能用这个流来读
+
+	—— 以字节的方式来完成输入/读的操作【此过程是由硬盘 ----> 内存】
+
+	—— 实例化格式：FileInputStream 变量名 = new FileInputStream("路径") ;//路径中的斜杠记得写成"\\"或"/"
+
+		* 记得关闭【在finally中关，先提前确定文件不为空避免空指针异常】
+
+	—— 方法：//需要捕捉或抛出异常
+
+		* int		read() - 从此输入流中读取一个数据字节【返回：下一个数据字节；若无数据返回-1】，每调一次read()都会向后移动一字节
+				缺点：每次只能读取一个字节，效率低
+		
+		* int		read(byte[] b) - 从此输入流中将最多 b.length 个字节的数据读入一个 byte 数组中【返回：读取到的缓冲区的字节总数而非字节本身，如果因为已经到达文件末尾而没有更多的数据，则返回 -1】
+				
+		* int		available() - 返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取（或跳过）的估计剩余字节数【简单来说，就说返回流当中剩余的没有读到的字节数量】
+
+		* long		skip(long n) - 从输入流中跳过并丢弃 n 个字节的数据
+ 
+3.FileOutputStream:
+
+	—— 文件字节输出流，负责写，由内存 ----> 硬盘【写完要刷新flush】
+
+	—— 实例化格式：FileOutputStream 变量名 = new FileOutputStream("路径") ;//路径中的斜杠记得写成"\\"或"/"
+
+		* 如果要用的文件不存在会自动创建
+
+		* 记得关闭【在finally中关，先提前确定文件不为空避免空指针异常】
+
+
+	—— 方法：
+
+		* void		write(byte[] b) - 将 b.length 个字节从指定 byte 数组写入此文件输出流中
+
+		* void		write(byte[] b, int off, int len) - 将指定 byte 数组中从偏移量 off 开始的 len 个字节写入此文件输出流
+
+		* void		write(int b) - 将指定字节写入此文件输出流 
+
+		！！！注意：以上三种方法的写入是将文件清空再写入【谨慎使用】
+
+		如果不想清空文件而在文件末尾添加内容，使用FileOutputStream("路径",true)创建对象，以追加方式写入
+ 
+ 		* void		close() - 关闭此文件输出流并释放与此流有关的所有系统资源
+ 
+4.文件的复制：
+
+	通过FileInputStream和FileOutputStream配合使用【万能拷贝，任何类型的文件都能拷】

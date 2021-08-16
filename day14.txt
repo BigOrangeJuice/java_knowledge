@@ -1,0 +1,110 @@
+java_day14
+2021/7/29
+
+1.toString()方法：
+
+	—— 源代码：public String toString(){
+			return getClass().getName() + '@' + Interger.toHexString(hashCode()) ;
+			}
+
+		默认实现为：类名@对象的内存地址转换为十六进制的形式
+	
+	—— 作用：通过调用这个方法可以将一个"java对象"转换成"字符串"
+
+	—— 建议：所有子类都去重写toString方法【否则默认返回的是地址】
+
+		toString()方法应该是简洁的、详实的、可读性强的
+
+	—— 字符串一旦创建不可改写【相当于一个字面常量】【创建好便放入位于方法区的字符串常量池中，用的时候让变量指向】
+
+2.equals()方法：
+
+	—— 源代码：public boolean equals(Object obj){
+			return (this == obj) ;
+			}
+
+	—— 作用：判断两个对象是否相等【也就是说，也可以通过这个判断两个字符串是否相等】
+
+		* "=="逻辑运算符是判断两个对象的地址是否相等，new两个新对象即使内容一样，但由于地址不同，判断也是false，事与愿违
+
+	—— equals也需要重写：在Object类中的equals方法，默认采用的是"=="来判断两对象相等
+
+		重写以后比较的是对象中的内容(用到多态中的转型)
+
+		注意：equals要重写彻底，类中属性如果有引用类型的属性，要记住把该引用类型的属性对于的类中的equals也重写【否则在用equals比较该属性时，比较的还是地址】
+
+	—— 实践：
+
+		对于String类，SUN公司已经重写过了，因此可以直接用equals直接比较俩字符串
+
+		而用户自己定义的类则得乖乖自己重写equals
+
+3.hashCode()方法：
+
+	* 将地址转为哈希值
+
+4.String()类中的方法：
+
+	* 字符串.charAt(int索引值):返回索引值处字符串对应的char值
+
+	* 字符串.toCharArray():将字符串转为一个字符数组并返回
+
+	* 字符串.compareTo(另一个字符串):判断两字符串是否相同----完全相同返回0;前者首个不相同字母小于后者,返回-1;前者首个不相同字母大于后者,返回1
+
+	* 字符串.equals(另一个字符串):判断两字符串是否相同----相同为true;不相同为false
+
+	* 字符串.contains(另一个字符串):判断前者是否包含后者----包含返回true;不包含返回false
+
+	* 字符串.concat(另一个字符串):将另一个字符串连接到字符串结尾【可连续使用：字符串.concat().concat()】
+
+	* 字符串.getBytes():将此 字符串 编码为 byte 序列，并将结果存储到一个新的 byte 数组中
+
+	* 字符串.isEmpty():判断字符串是否为空字符串【若字符串为null，会出现空指针异常】----是为true；否为false
+
+		实际上判断的是字符串的length()是否为0
+
+	* 字符串.indexOf(char ch):返回指定字符在此字符串中第一次出现处的索引
+
+	* 字符串.replace(char oldChar,char newChar):将字符串中的旧字符用新字符代替
+
+	* 字符串.replace(CharSequence target, CharSequence replacement):将字符串中的旧子字符串替换为新子字符串
+
+	* 字符串.split(指定字符串):以指定字符串拆分开字符串【指定字符串不再显示】,返回一个字符串数组
+		
+		！！！通过特殊字符切割时，必须用\\转义
+
+	* 字符串.endsWith(指定字符串):判断字符串是否以指定字符串结尾----是为true；否为false
+
+	* 字符串.startsWith(指定字符串):判断字符串是否以指定字符串开头----是为true；否为false
+
+	* 字符串.substring(int begin):返回一个从此索引开头的子字符串
+
+	  字符串.substring(int begin,int end):返回一个从此索引开头,此索引结束的子字符串
+
+	* 字符串.toLowerCase():返回小写化的字符串
+
+	  字符串.toUpperCase():返回大写化的字符串
+
+	* 字符串.trim():去除字符串前后空白并返回【中间的空白无法去除】
+
+	*(唯一的静态方法,无需new对象便可使用) String.valueOf(任意数据类型的字面值或变量):将数据类型的字面值或变量对应的数据转化为字符串类型
+		
+		作用:将"非字符串"转换为"字符串"【包括引用数据类型】
+
+5.StringBuffer类：
+
+	* 前提：用‘+’进行字符串的简单拼接会在【字符串常量池】创建过多无用的中间量字符串，造成空间浪费
+
+	* 查看源代码会发现：StringBuffer和String的有个区别在于数组，前者为无限定，后者为final修饰，上方的问题也容易理解
+
+	* 使用StringBuffer类创建对象调用append方法拼接字符串
+
+		StringBuffer sb = new StringBuffer(可以在此指定int数据初始化容量) ;//不指定在满了以后也会自动扩容，但扩容次数越少效率越高
+
+		sb.append(字符串) ;
+
+6.StringBuilder类对于StringBuffer类的区别：
+
+	* StringBuffer有synchronize修饰，表示StringBuffer在多线程环境下运行时安全的
+
+	* StringBuilder没有，表示StringBuilder在多线程环境下运行是不安全的

@@ -1,0 +1,131 @@
+java_day16
+2021/8/2
+
+1.Arrays类中的方法：由于都是工具方法，所以都是静态的
+
+	* Arrays.sort(int[] a):对指定的 int 型数组按数字升序进行排序
+
+	(其他类型的数组升序排序也同理,利用的方法重载,并不包括boolean类型的数组)
+
+	* Arrays.binarySearch(byte[] a, byte key):使用二分搜索法来搜索指定的 byte 型数组，以获得指定的值
+
+		a - 要搜索的数组
+		key - 要搜索的值
+
+	* Arrays.binarySearch(byte[] a, int fromIndex, int toIndex, byte key):使用二分搜索法来搜索指定的 byte 型数组的范围，以获得指定的值【但这个必须先提前排好序，且如果存在相同数字，则无法保证找到的是哪个】
+
+		a - 要搜索的数组
+		fromIndex - 要搜索的第一个元素的索引（包括）
+		toIndex - 要搜索的最后一个元素的索引（不包括）
+		key - 要搜索的值
+
+	(其他类型的数组寻找指定值也同理,利用的方法重载,并不包括boolean类型的数组)
+
+	* Arrays.equals(byte[] a, byte[] a2):如果两个指定的 byte 型数组彼此相等，则返回 true
+
+	(其他类型的数组相比较也同理,利用的方法重载,包括boolean类型的数组)
+
+2.enum枚举:是一个引用数据类型
+
+	* 定义格式:enum 枚举名{
+			枚举元素
+		}
+
+	* 结尾无需加分号
+
+	* enum不能定义在方法内
+
+	* 每一个枚举元素都看做一个变量
+
+	* 对于颜色,天气,星期等等有限个且特定的一个一个元素可才取枚举
+
+3.生成随机数:
+
+	* Random random = new Random() ;
+
+	  int i = random.nextInt(int bound) ;//bound是一个范围，随机一个[0,bound)的随机数
+
+	* Math.random() - 生成[0,1)范围内的一个double类型的随机数，通过加减乘除来限定他的范围
+
+4.Date类：位于java.util，可提前导入
+
+	* 类 Date 表示特定的瞬间，精确到毫秒
+
+	* 无参构造方法：Date() - 分配 Date 对象并初始化此对象，以表示分配它的时间（精确到毫秒）
+
+	* Date(long date) - 自1970年1月1日开始，经过long date的毫秒数后的时间
+
+		long date - 从1970年1月1日开始计时的毫秒数
+
+	* getTime()方法：非静态 - 获取指定时间到1970-01-01的毫秒时间
+
+5.SimpleDateFormat类：位于java.text
+
+	* 作用：用于时间格式化
+
+	* 只是用来格式化时间，并不能用来表示时间，单输出一个SimpleDateFormat类变量得到的只是一个地址
+
+	* 无参构造方法：SimpleDateFormat() - 用默认的模式和默认语言环境的日期格式符号构造 SimpleDateFormat
+
+	* SimpleDateFormat(String pattern)  -  用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat
+
+		eg："yyyy-MM-dd hh:mm:ss:SSS a z"
+
+			y - 年；
+			M - 月；
+			d - 天；
+			h - 小时(0-12)；
+			m - 分钟；
+			s - 秒；
+			S - 毫秒；
+			a - PM/AM；
+			z - 时区
+	
+	* 普通方法【由Date转为String】：String str = 变量.format(Date类数据/变量/或直接输入整型字面值) - 返回特定格式的日期字符串
+
+		- 先实例化一个Date对象(可省)
+
+		- 再SimpleDateFormat也创建一个对象确定时间格式
+
+		- 再 同上
+
+	* 【String转为Date】 - 定义一个字符串日期
+
+			     - 通过SimpleDateFormat实例化一个对象(格式需要跟定义的字符串日期的格式一致)//格式不同会出现异常ParseException
+
+			     - Date date = 引用.parse(字符串日期/变量) //需使用throws Exception
+
+	* 总结：Date转为String用到SimpleDateFormat中的format方法，String转为Date用到SimpleDateFormat中的parse方法【都是非静态的】
+
+6.currentTimeMillis()方法：返回值long类型，为System类中的静态方法
+
+	—— 返回当前时间与协调世界时 1970 年 1 月 1 日午夜之间的时间差
+
+	—— 使用：System.currentTimeMillis()
+	
+7.数字类DecimalFormat:位于java.text
+
+	—— 单输出一个无参构造的DecimalFormat变量，输出的只是一个地址
+
+	—— 格式：# 代表任意数字
+
+		 , 代表千分位
+
+		 . 代表小数点
+
+		 0 代表不够时补0
+
+	—— DecimalFormat(String pattern) - 使用给定的模式和默认语言环境的符号创建一个 DecimalFormat
+
+	—— 引用.format(规定格式的数字)：返回一个对应字符串
+
+8.BigDeciamal类：位于java.math
+
+	—— 相应对象属于引用数据类型
+	
+	—— 精度极高，优于double
+
+	—— 需要通过特定的方法进行加减乘除
+
+
+	
